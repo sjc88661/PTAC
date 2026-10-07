@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Download the two backbone models used by Prether."""
+"""Download the two backbone models used by PTAC."""
 
 from __future__ import annotations
 
@@ -33,12 +33,12 @@ def download_proprime(target_dir: Path) -> None:
 
 def parse_args() -> argparse.Namespace:
     repo_root = Path(__file__).resolve().parent.parent
-    ap = argparse.ArgumentParser(description="Download Prether backbone models.")
+    ap = argparse.ArgumentParser(description="Download PTAC backbone models.")
     ap.add_argument(
         "--repo_root",
         type=Path,
         default=repo_root,
-        help="Prether repository root. Defaults to the parent of this script.",
+        help="PTAC repository root. Defaults to the parent of this script.",
     )
     return ap.parse_args()
 
