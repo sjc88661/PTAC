@@ -692,7 +692,7 @@ def parse_args():
 
     ap.add_argument("--mode", type=str, default="bigru-fusion", choices=["late-fusion", "bigru-fusion"])
 
-    ap.add_argument("--ckpt_dir", type=str, default="../train-T5+Prime/fusion_out",
+    ap.add_argument("--ckpt_dir", type=str, default="train/fusion_out",
                     help="Directory containing best_head_fold_{i}.pt")
     ap.add_argument("--folds", type=int, default=5)
 

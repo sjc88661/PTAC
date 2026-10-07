@@ -10,21 +10,25 @@ __pycache__/
 *.log
 .DS_Store
 
-# Prediction and evaluation scratch outputs
-/predict-T5+Prime-token/pred_*/
-/predict-T5+Prime-token/pre-*/
-/predict-T5+Prime-token/pred_out/
-/predict-T5+Prime-token/fusion_cache/
-/train-T5+Prime/fusion_cache/
-/test-T5+Prime_token/fusion_cache/
-/test-T5+Prime_token/test_out/
+# Training, prediction and evaluation scratch outputs
+/fusion_out/
+/pred_out/
+/pred_output/
+/my_predictions/
+/test_out/
+/predict/pred_*/
+/predict/pre-*/
+/predict/pred_out/
+/test/test_out/
+/results/test_out/
+fusion_cache/
 
 # Keep curated release assets and trained fusion heads
 !/examples/
 !/results/
-!/train-T5+Prime/fusion_out/
-!/train-T5+Prime/fusion_out/best_head_fold_1.pt
-!/train-T5+Prime/fusion_out/best_head_fold_2.pt
-!/train-T5+Prime/fusion_out/best_head_fold_3.pt
-!/train-T5+Prime/fusion_out/best_head_fold_4.pt
-!/train-T5+Prime/fusion_out/best_head_fold_5.pt
+!/train/fusion_out/
+!/train/fusion_out/best_head_fold_1.pt
+!/train/fusion_out/best_head_fold_2.pt
+!/train/fusion_out/best_head_fold_3.pt
+!/train/fusion_out/best_head_fold_4.pt
+!/train/fusion_out/best_head_fold_5.pt

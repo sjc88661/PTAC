@@ -521,7 +521,7 @@ def parse_args():
     ap.add_argument("--input_path", type=str, required=True, help="test.csv or test.fasta")
     ap.add_argument("--input_type", type=str, default="fasta", choices=["csv", "fasta"])
 
-    ap.add_argument("--ckpt_dir", type=str, default="../train-T5+Prime/fusion_out",
+    ap.add_argument("--ckpt_dir", type=str, default="train/fusion_out",
                     help="dir containing best_head_fold_{i}.pt")
     ap.add_argument("--k_folds", type=int, default=5)
 
