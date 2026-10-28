@@ -43,18 +43,18 @@ Each sequence is assigned to one of three classes:
 | 1 | Thermophile |
 | 2 | Psychrophile |
 
-The dataset was constructed based on previously published protein temperature adaptation datasets. After quality filtering and sequence redundancy reduction, the data were divided into training and independent test sets.
+The manuscript describes a 2,400-sequence three-class dataset divided into 1,920 training and 480 test records. In a file-level audit, a candidate dataset with those counts matched the class-labelled sequence collection published by Huang et al. The original collection did not specify a train/test split; whether the candidate files and split correspond to the manuscript's final run and released checkpoints remains to be confirmed.
 
-The processed datasets used in this study are provided:
+Source: Huang A, Lu F, Liu F. Discrimination of psychrophilic enzymes using machine learning algorithms with amino acid composition descriptor. *Frontiers in Microbiology*. 2023;14:1130594. [DOI: 10.3389/fmicb.2023.1130594](https://doi.org/10.3389/fmicb.2023.1130594). The published source contains some identical sequences with conflicting class labels; these require review rather than an assumed correction.
+
+The repository currently contains:
 ```
 data/
 ├── train.csv
 └── test.csv
 ```
 
-The original dataset was obtained from:
-
-Pei H., Li X., et al. Identification of Thermophilic Proteins Based on Sequence-Based Bidirectional Representations from Transformer-Embedding Features. *Applied Sciences*, 2023, 13(5): 2858.
+> **Data availability notice:** The current `data/train.csv` contains 1,495 complete records and one truncated record, so it does not contain the complete 1,920-record candidate training set. `data/test.csv` contains 480 complete records and matched the candidate test set by ID, sequence, and label in the audit. The training file and its relationship to the final manuscript run require confirmation before reproducible training. The published files have not been silently replaced.
 
 **PTAC** predicts a protein's thermal adaptation class from its amino acid sequence:
 
@@ -129,23 +129,44 @@ python predict/predict.py \
 
 ## Performance
 
-5-fold cross-validation mean results on the independent test set:
+### Manuscript-reported independent-test results
 
-| Metric | Score | Metric | Score |
-|:---|---:|---:|---:|
-| **Accuracy (ACC)** | **0.9492** | Precision<sub>macro</sub> | 0.9498 |
-| **MCC** | **0.9248** | AUROC<sub>macro</sub> | 0.9917 |
-| Sensitivity<sub>macro</sub> | 0.9482 | AUROC<sub>micro</sub> | 0.9931 |
-| Specificity<sub>macro</sub> | 0.9750 | AUPRC<sub>macro</sub> | 0.9803 |
-| F1<sub>macro</sub> | 0.9479 | AUPRC<sub>micro</sub> | 0.9873 |
+The values below reproduce the manuscript's Table 1 and Supplementary Table S1 at their reported precision. The manuscript's ACC, macro F1 and MCC match the rounded averages in a candidate summary of five models; those averages should not be interpreted as metrics from probability-averaged ensemble predictions. The link between the manuscript run, the candidate result files, and the released checkpoints is still being verified.
 
-| Per-class F1 | Score |
-|:---|:---:|
-| Mesophile (嗜温) | **0.9588** |
-| Thermophilic (嗜热) | **0.9431** |
-| Psychrophilic (嗜冷) | **0.9418** |
+| Metric (Table 1) | Manuscript value |
+|:---|---:|
+| Accuracy (ACC) | 94.9% |
+| Macro F1 | 94.8% |
+| MCC | 92.5% |
+| Specificity (SP) | 95.0% |
+| Precision (PRE) | 94.8% |
+| AUROC | 99.2% |
+| AUPRC | 98.0% |
 
-> Visual artifacts (ROC curves, confusion matrix) are available in [`results/`](results/).
+| Class (Supplementary Table S1) | F1 |
+|:---|---:|
+| Mesophilic (嗜温) | 92.2% |
+| Thermophilic (嗜热) | 98.9% |
+| Psychrophilic (嗜冷) | 93.3% |
+
+### Repository summary and unresolved differences
+
+The existing [`results/test_metrics_summary.csv`](results/test_metrics_summary.csv) records the following means. It is retained as an existing result file, not rewritten to match the manuscript. The manuscript's Table 1 reports SP as 95.0% and PRE as 94.8%, whereas this summary reports macro SP as 97.4962% and macro PRE as 94.9824%. The manuscript's Supplementary Table S1 reports PRE as 95.0%. These differences and the exact experiment/checkpoint provenance require verification before choosing a single value.
+
+| Metric | Repository summary mean |
+|:---|---:|
+| ACC | 0.949167 |
+| MCC | 0.924808 |
+| Macro sensitivity | 0.948245 |
+| Macro specificity | 0.974962 |
+| Macro precision | 0.949824 |
+| Macro F1 | 0.947853 |
+| Macro AUROC | 0.991738 |
+| Micro AUROC | 0.993130 |
+| Macro AUPRC | 0.980289 |
+| Micro AUPRC | 0.987346 |
+
+The previously displayed per-class F1 values 95.88%, 94.31%, and 94.18% did not have a traceable source in the records inspected and have been replaced above by the manuscript-reported values. Visual artifacts are available in [`results/`](results/); their connection to the manuscript run remains to be confirmed.
 
 ---
 
